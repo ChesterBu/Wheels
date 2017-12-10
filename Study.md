@@ -1,4 +1,5 @@
-##CSS
+
+## CSS
 * [详解 CSS 系列](https://segmentfault.com/bookmark/1230000002226760)
 * [CSS归纳总结](https://segmentfault.com/bookmark/1230000002429500)
 
@@ -7,7 +8,7 @@
 * [JS归纳](https://segmentfault.com/bookmark/1230000002226470)
 * [JavaScript深入系列](https://github.com/mqyqingfeng/Blog)
 * [JS异步](https://github.com/wangfupeng1988/js-async-tutorial)
-* [JS数据结构与算法1](http://www.liuyiqi.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/）
+* [JS数据结构与算法1](http://www.liuyiqi.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/
 * [JS数据结构与算法2](https://segmentfault.com/bookmark/1230000002226693)
 * [AJAX系列](https://segmentfault.com/a/1190000012207226)
 * [异步流程之Promise解析](https://segmentfault.com/a/1190000011986252)
@@ -29,11 +30,12 @@
 * [面试题3](http://hawx1993.github.io/Front-end-Interview-Questions/#/?id=interview-quesetions)
 
 ## 其他
-*[前端必备](https://segmentfault.com/bookmark/1230000000699287)
+
 * [1](https://github.com/ecmadao/Coding-Guide)
 * [2](https://github.com/wengjq/Blog)
 * [3](https://github.com/laizimo/zimo-article)
 * [4](https://github.com/wy-ei/notebook)
+* [前端必备](https://segmentfault.com/bookmark/1230000000699287)
 * [前端日报](https://github.com/daochouwangu/webfrontdaily/issues)
 
 
