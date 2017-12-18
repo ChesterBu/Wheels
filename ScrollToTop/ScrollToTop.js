@@ -158,6 +158,12 @@
         fadeSpeed: 10
     }
 
+    var proto = ScrollToTop.prototype;
+    proto.init = function () {
+        this.hideElement();
+        this.bindScrollEvent();
+        this.bindToTopEvent()
+    }
 
 
 
