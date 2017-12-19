@@ -8,8 +8,15 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-
-
+    <span id = 'toTop' class=" toTop"></span>
+    <script src="../ScrollToTop.js"></script>
+    <script>
+        var topElement = document.getElementById('toTop');
+        var toTop = new ScrollToTop(topElement,{
+                showWhen: 200,
+                speed: 200
+        })
+    </script>
 
 </body>
 </html>

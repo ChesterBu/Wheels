@@ -1,21 +1,21 @@
 (function () {
-    let root = (typeof self == 'object' && self.self == self && self) ||
-        (typeof global == 'object' && global.global == global && global) ||
+    var root = (typeof self === 'object' && self.self == self && self) ||
+        (typeof global === 'object' && global.global == global && global) ||
         this || {};
+
     var lastTime = 0;
     var vendors = ['webkit', 'moz'];
     for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-        window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame']
+        window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
         window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelAnimationFrame']
     }
     if (!window.requestAnimationFrame) {
         window.requestAnimationFrame = function (callback, element) {
-            var currTime = new Date().getTime()
-            var timeToCall = Math.max(0, 16.7 - (currTime - lastTime))
+            var currTime = new Date().getTime();
+            var timeToCall = Math.max(0, 16.7 - (currTime - lastTime));
             var id = window.setTimeout(function () {
                 callback(currTime + timeToCall);
-
-            }, timeToCall)
+            }, timeToCall);
             lastTime = currTime + timeToCall;
             return id;
         }
@@ -40,7 +40,7 @@
             fBound.prototype = new fNOP()
             return fBound
         }
-    }
+    };
 
     var util = {
         extend:function (target) {
@@ -137,15 +137,25 @@
                 window.DocumentTouch && document instanceof window.DocumentTouch;
 
         },
+        indexOf: function(array, item) {
+            var result = -1;
+            for (var i = 0, len = array.length; i < len; i++) {
+                if (array[i] === item) {
+                    result = i;
+                    break;
+                }
+            }
+            return result;
+        },
         getTime: function() {
             return new Date().getTime();
         }
-    }
+    };
 
     function ScrollToTop(element, options) {
         this.element = typeof element === 'string' ? document.querySelector(element) : element;
 
-        this.options = util.extend({}, this.constructor.defaultOptions, options)
+        this.options = util.extend({}, this.constructor.defaultOptions, options);
 
         this.init();
     }
@@ -156,19 +166,88 @@
         speed: 100,
         // 元素淡入和淡出的速度。默认值为 10，数值越大，速度越快。 10 表示浏览器每次重绘，元素透明度以 10% 递增或者递减。
         fadeSpeed: 10
-    }
+    };
 
     var proto = ScrollToTop.prototype;
+
     proto.init = function () {
         this.hideElement();
         this.bindScrollEvent();
         this.bindToTopEvent()
-    }
+    };
+
+    proto.hideElement = function () {
+        util.setOpacity(this.element,0);
+        this.status = 'hide'
+    };
+
+    proto.bindScrollEvent = function () {
+        var self =this;
+        util.addEvent(window,'scroll',function () {
+           if(util.getScrollOffsets().y > self.options.showWhen){
+               if(self.status === 'hide'){
+                   util.fadeIn(self.element,self.options.fadeSpeed);
+                   self.status = 'show'
+               }
+           } else {
+               if(self.status === 'show'){
+                   util.fadeOut(self.element,self.options.fadeSpeed);
+                   self.status = 'hide';
+                   util.removeClass(self.element,'backing')
+
+               }
+           }
+        })
+    };
+
+    proto.handleBack = function () {
+        var timer,self= this;
+        util.addClass(self.element,'backing');
+        cancelAnimationFrame(timer);
+        timer = requestAnimationFrame(function fn() {
+            var oTop = document.body.scrollTop || document.documentElement.scrollTop;
+            if(oTop>0){
+                document.body.scrollTop = document.documentElement.scrollTop = oTop -self.options.speed;
+                timer = requestAnimationFrame(fn);
+            } else {
+                cancelAnimationFrame(timer);
+            }
+        });
+
+    };
+
+    proto.bindToTopEvent = function () {
+        var self = this;
+        util.addEvent(self.element,'click',self.handleBack.bind(self))
+        if(util.supportTouch()){
+            util.addEvent(self.element,'touchstart',function (e) {
+                self._startX = e.touches[0].pageX;
+                self._startY = e.touches[0].pageY;
+                self._startTime = util.getTime();
+            })
+            util.addEvent(self.element,'touchmove',function (e) {
+                self._moveX = e.touches[0].pageX;
+                self._moveY = e.touches[0].pageY;
+
+            })
+            util.addEvent(self.element,'touchend',function (e) {
+                var endTime =util.getTime();
+                if(self._moveX !==null && Math.abs(self._moveX-self._startX)>10 || self._moveY !== null && Math.abs(self._moveY - self._startY>10)){
+
+                } else {
+                    if(endTime - self._startTime < 500){
+                        self.handleBack()
+                    }
+                }
+            })
+        }
+    };
 
 
 
-    if (typeof exports != 'undefined' && !exports.nodeType) {
-        if (typeof module != 'undefined' && !module.nodeType && module.exports) {
+
+    if (typeof exports !== 'undefined' && !exports.nodeType) {
+        if (typeof module !== 'undefined' && !module.nodeType && module.exports) {
             exports = module.exports = ScrollToTop;
         }
         exports.ScrollToTop = ScrollToTop;
