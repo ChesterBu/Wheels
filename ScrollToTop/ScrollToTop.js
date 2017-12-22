@@ -7,7 +7,7 @@
     var vendors = ['webkit', 'moz'];
     for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
         window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
-        window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelAnimationFrame']
+        window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelAnimationFrame'];
     }
     if (!window.requestAnimationFrame) {
         window.requestAnimationFrame = function (callback, element) {
@@ -18,28 +18,28 @@
             }, timeToCall);
             lastTime = currTime + timeToCall;
             return id;
-        }
+        };
     }
     if (!window.cancelAnimationFrame) {
         window.cancelAnimationFrame = function (id) {
-            clearTimeout(id)
-        }
+            clearTimeout(id);
+        };
     }
     Function.prototype.bind = Function.prototype.bind || function (context) {
         if (typeof this !== 'function') {
-            throw new Error('Function.prototype.bind - what is trying to be bound is not callable')
+            throw new Error('Function.prototype.bind - what is trying to be bound is not callable');
         }
         var self = this;
         var args = Array.prototype.slice.call(arguments, 1);
         var fNOP = function () {
-        }
+        };
         var fBound = function () {
             var bindArgs = Array.prototype.slice.call(arguments);
-            self.apply(this instanceof fNOP ? this : context, args.concat(bindArgs))
-            fNOP.prototype = this.prototype
-            fBound.prototype = new fNOP()
-            return fBound
-        }
+            self.apply(this instanceof fNOP ? this : context, args.concat(bindArgs));
+            fNOP.prototype = this.prototype;
+            fBound.prototype = new fNOP();
+            return fBound;
+        };
     };
 
     var util = {
@@ -47,25 +47,25 @@
             for(var i = 1,len = arguments.length;i<len;i++){
                 for (var prop in arguments[i]){
                     if (arguments[i].hasOwnProperty(prop)){
-                        target[prop] = arguments[i][prop]
+                        target[prop] = arguments[i][prop];
                     }
                 }
             }
-            return target
+            return target;
         },
         getStyle:function (element,prop) {
-            return element.currentStyle ? element.currentStyle[prop]:document.defaultView.getComputedStyle(element)[prop]
+            return element.currentStyle ? element.currentStyle[prop]:document.defaultView.getComputedStyle(element)[prop];
         },
         getScrollOffsets:function () {
             var w= window;
-            if(w.pageXOffset != null)return {x:w.pageXOffset,y:w.pageYOffset}
-            var d = w.document
+            if(w.pageXOffset != null)return {x:w.pageXOffset,y:w.pageYOffset};
+            var d = w.document;
             if(document.compatMode == "CSS1Compat"){
                 return {
                     x:d.documentElement.scrollLeft,y:d.documentElement.scrollTop
-                }
+                };
             }
-            return { x: d.body.scrollLeft, y: d.body.scrollTop }
+            return { x: d.body.scrollLeft, y: d.body.scrollTop };
         },
         setOpacity: function(ele, opacity) {
             if (ele.style.opacity != undefined) {
@@ -77,33 +77,33 @@
         },
         fadeIn: function(element, speed) {
             var opacity = 0;
-            util.setOpacity(element, 0)
+            util.setOpacity(element, 0);
             var timer;
 
             function step() {
-                util.setOpacity(element, opacity += speed)
+                util.setOpacity(element, opacity += speed);
                 if (opacity < 100) {
                     timer = requestAnimationFrame(step);
                 } else {
-                    cancelAnimationFrame(timer)
+                    cancelAnimationFrame(timer);
                 }
             }
-            requestAnimationFrame(step)
+            requestAnimationFrame(step);
         },
         fadeOut: function(element, speed) {
             var opacity = 100;
-            util.setOpacity(element, 100)
+            util.setOpacity(element, 100);
             var timer;
 
             function step() {
-                util.setOpacity(element, opacity -= speed)
+                util.setOpacity(element, opacity -= speed);
                 if (opacity > 0) {
                     timer = requestAnimationFrame(step);
                 } else {
-                    cancelAnimationFrame(timer)
+                    cancelAnimationFrame(timer);
                 }
             }
-            requestAnimationFrame(step)
+            requestAnimationFrame(step);
         },
         addEvent: function(element, type, fn) {
             if (document.addEventListener) {
@@ -111,8 +111,8 @@
                 return fn;
             } else if (document.attachEvent) {
                 var bound = function() {
-                    return fn.apply(element, arguments)
-                }
+                    return fn.apply(element, arguments);
+                };
                 element.attachEvent('on' + type, bound);
                 return bound;
             }
@@ -122,15 +122,15 @@
             if (util.indexOf(classNames, className) == -1) {
                 classNames.push(className);
             }
-            element.className = classNames.join(' ')
+            element.className = classNames.join(' ');
         },
         removeClass: function(element, className) {
             var classNames = element.className.split(/\s+/);
-            var index = util.indexOf(classNames, className)
+            var index = util.indexOf(classNames, className);
             if (index !== -1) {
                 classNames.splice(index, 1);
             }
-            element.className = classNames.join(' ')
+            element.className = classNames.join(' ');
         },
         supportTouch: function() {
             return 'ontouchstart' in window ||
@@ -173,12 +173,12 @@
     proto.init = function () {
         this.hideElement();
         this.bindScrollEvent();
-        this.bindToTopEvent()
+        this.bindToTopEvent();
     };
 
     proto.hideElement = function () {
         util.setOpacity(this.element,0);
-        this.status = 'hide'
+        this.status = 'hide';
     };
 
     proto.bindScrollEvent = function () {
@@ -187,17 +187,17 @@
            if(util.getScrollOffsets().y > self.options.showWhen){
                if(self.status === 'hide'){
                    util.fadeIn(self.element,self.options.fadeSpeed);
-                   self.status = 'show'
+                   self.status = 'show';
                }
            } else {
                if(self.status === 'show'){
                    util.fadeOut(self.element,self.options.fadeSpeed);
                    self.status = 'hide';
-                   util.removeClass(self.element,'backing')
+                   util.removeClass(self.element,'backing');
 
                }
            }
-        })
+       });
     };
 
     proto.handleBack = function () {
@@ -218,28 +218,28 @@
 
     proto.bindToTopEvent = function () {
         var self = this;
-        util.addEvent(self.element,'click',self.handleBack.bind(self))
+        util.addEvent(self.element,'click',self.handleBack.bind(self));
         if(util.supportTouch()){
             util.addEvent(self.element,'touchstart',function (e) {
                 self._startX = e.touches[0].pageX;
                 self._startY = e.touches[0].pageY;
                 self._startTime = util.getTime();
-            })
+            });
             util.addEvent(self.element,'touchmove',function (e) {
                 self._moveX = e.touches[0].pageX;
                 self._moveY = e.touches[0].pageY;
 
-            })
+            });
             util.addEvent(self.element,'touchend',function (e) {
                 var endTime =util.getTime();
                 if(self._moveX !==null && Math.abs(self._moveX-self._startX)>10 || self._moveY !== null && Math.abs(self._moveY - self._startY>10)){
 
                 } else {
                     if(endTime - self._startTime < 500){
-                        self.handleBack()
+                        self.handleBack();
                     }
                 }
-            })
+            });
         }
     };
 
