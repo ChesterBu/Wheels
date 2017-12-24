@@ -2,6 +2,7 @@
     var root = (typeof self == 'object' && self.self == self && self) ||
         (typeof global == 'object' && global.global == global && global) ||
         this || {};
+
     var lastTime = 0;
     var vendors = ['webkit', 'moz'];
     for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
@@ -169,7 +170,7 @@
     }
 
     ProgressIndicator.defaultOptions = {
-        color: '#0A744DA'
+        color: '#0A74DA'
     };
     var Pproto = ProgressIndicator.prototype = new EventEmitter();
 
@@ -187,11 +188,10 @@
         div.id = 'progress-indicator';
         div.className = 'progress-indicator';
         div.style.position = 'fixed';
-        dis.style.top = 0;
+        div.style.top = 0;
         div.style.left = 0;
         div.style.height = '3px';
         div.style.backgroundColor = this.options.color;
-
         this.element = div;
         document.body.appendChild(div);
     };
@@ -219,6 +219,9 @@
                 if (prev && perc == 1) {
                     self.emit('end');
                 }
+
+                prev = perc;
+                self.setWidth(perc);
             });
         });
     };
