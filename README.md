@@ -10,7 +10,7 @@
 ## 2.ScrollToTop
 介绍：原生 JavaScript 实现的回到顶部库
 
-地址：https://github.com/ChesterBu/Wheels/blob/master/ScrollToTop
+地址：https://github.com/ChesterBu/Wheels/tree/master/ScrollToTop
 
 预览：https://chesterbu.github.io/Wheels/ScrollToTop/doc/index.html
 
@@ -25,4 +25,4 @@
 ## 4.Sticky
 介绍：原生 JavaScript 实现的固定在顶部效果
 
-地址：https://github.com/ChesterBu/Wheels/blob/master/Sticky
+地址：https://github.com/ChesterBu/Wheels/tree/master/Sticky
