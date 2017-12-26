@@ -10,6 +10,19 @@
 ## 2.ScrollToTop
 介绍：原生 JavaScript 实现的回到顶部库
 
-地址：https://github.com/ChesterBu/Wheels/blob/master/ScrollToTop/ScrollToTop.js
+地址：https://github.com/ChesterBu/Wheels/blob/master/ScrollToTop
 
 预览：https://chesterbu.github.io/Wheels/ScrollToTop/doc/index.html
+
+
+## 3.progress-indicator
+介绍：仿阮一峰老师的《ECMAScript 6 入门》的顶部进度条
+
+地址：https://github.com/ChesterBu/Wheels/tree/master/progress-indicator
+
+预览：https://chesterbu.github.io/Wheels/progress-indicator/doc/index.html
+
+## 4.Sticky
+介绍：原生 JavaScript 实现的固定在顶部效果
+
+地址：https://github.com/ChesterBu/Wheels/blob/master/Sticky
