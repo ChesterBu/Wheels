@@ -26,3 +26,5 @@
 介绍：原生 JavaScript 实现的固定在顶部效果
 
 地址：https://github.com/ChesterBu/Wheels/tree/master/Sticky
+
+预览：https://chesterbu.github.io/Wheels/Sticky/doc/index.html
