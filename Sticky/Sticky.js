@@ -32,7 +32,7 @@
                 element.className = classNames.join(' ');
             },
             removeClass(element, className) {
-                let classNames = element.className;
+                let classNames = element.className.split(/\s+/);
                 let index = classNames.indexOf(className);
                 if (index !== -1) {
                     classNames.splice(index, 1);
