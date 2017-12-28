@@ -68,7 +68,7 @@
                 return bound;
             }
         },
-        sValidListener: function(listener) {
+        isValidListener: function(listener) {
             if (typeof listener === 'function') {
                 return true;
             } else if (listener && typeof listener === 'object') {
