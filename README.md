@@ -37,3 +37,7 @@
 地址：https://github.com/ChesterBu/Wheels/tree/master/LazyLoad
 
 预览：https://chesterbu.github.io/Wheels/LazyLoad/doc/index.html
+
+## 6.Preload
+
+原生 JavaScript 实现的预加载库
