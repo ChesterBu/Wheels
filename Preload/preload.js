@@ -8,7 +8,7 @@
             for (var i = 1, len = arguments.length; i < len; i++) {
                 for (var prop in arguments[i]) {
                     if (arguments[i].hasOwnProperty(prop)) {
-                        target[prop] = arguments[i][prop]
+                        target[prop] = arguments[i][prop];
                     }
                 }
             }
@@ -19,19 +19,19 @@
             if (typeof listener === 'function') {
                 return true;
             } else if (listener && typeof listener === 'object') {
-                return util.isValidListener(listener.listener)
+                return util.isValidListener(listener.listener);
             } else {
                 return false;
             }
         },
 
-    }
+    };
 
 
     class Preload {
         constructor(pics, options) {
             if (!Array.isArray(pics)) {
-                throw new Error('pics must be an array type')
+                throw new Error('pics must be an array type');
             }
             this.pics = pics;
             this.options = util.extend({}, this.constructor.defaultOptions, options);
@@ -46,7 +46,7 @@
     Preload.defaultOptions = {
         complete() {},
         progress() {}
-    }
+    };
 
 
 
@@ -61,6 +61,6 @@
         exports.Preload = Preload;
     } else {
         root.Preload = Preload;
-    };
+    }
 
 }());
