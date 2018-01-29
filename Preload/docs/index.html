@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no">
+    <title>预加载与进度条</title>
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="loadPage" id="loadPage">
+        <div class="loading">
+            <div class="loading-num" id="loading-num">0%</div>
+            <div class="inner">
+                <div class="loading-progress" id="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+    <div class="main">loading 消失，进入主内容区</div>
+    <script type="text/javascript" src="../preload.js"></script>
+    <script>
+    var pics = [
+        "https://github.com/ChesterBu/Wheels/blob/master/LazyLoad/doc/img/1.jpg?raw=true",
+        "https://github.com/ChesterBu/Wheels/blob/master/LazyLoad/doc/img/2.jpg?raw=true",
+        "https://github.com/ChesterBu/Wheels/blob/master/LazyLoad/doc/img/3.jpg?raw=true",
+        "https://github.com/ChesterBu/Wheels/blob/master/LazyLoad/doc/img/4.jpg?raw=true",
+        "https://github.com/ChesterBu/Wheels/blob/master/LazyLoad/doc/img/5.jpg?raw=true",
+        ]
+
+    let preload = new Preload(pics, {
+        complete(successNum, failNum) {
+            console.log('成功加载' + successNum + '张图片，加载失败' + failNum + '张图片');
+            setTimeout(function() {
+                document.getElementById("loadPage").style.display = 'none'
+            }, 500)
+        },
+        progressing(index, total, type) {
+            let progress = document.getElementById("loading-progress");
+            let num = document.getElementById("loading-num");
+
+            let percent = Math.floor(index / total * 100) + '%'
+
+            num.innerHTML = progress.style.width = percent;
+        }
+    });
+    </script>
+</body>
+
+</html>

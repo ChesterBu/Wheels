@@ -3,55 +3,52 @@
         (typeof global == 'object' && global.global == global && global) ||
         this || {};
 
-    const util = {
-        extend(target) {
-            for (var i = 1, len = arguments.length; i < len; i++) {
-                for (var prop in arguments[i]) {
-                    if (arguments[i].hasOwnProperty(prop)) {
-                        target[prop] = arguments[i][prop];
-                    }
-                }
-            }
-
-            return target;
-        },
-        isValidListener(listener) {
-            if (typeof listener === 'function') {
-                return true;
-            } else if (listener && typeof listener === 'object') {
-                return util.isValidListener(listener.listener);
-            } else {
-                return false;
-            }
-        },
-
-    };
-
-
     class Preload {
         constructor(pics, options) {
-            if (!Array.isArray(pics)) {
-                throw new Error('pics must be an array type');
-            }
+            if (!Array.isArray(pics)) throw new Error('pics must be an array type');
             this.pics = pics;
-            this.options = util.extend({}, this.constructor.defaultOptions, options);
+            this.options = Object.assign({}, this.constructor.defaultOptions, options);
             this.index = this.failNum = 0;
             this.init();
-
+        }
+        init() {
+            this.pics.forEach(item => {
+                this.loadImg(item);
+            });
+        }
+        loadImg(src) {
+            let img = new Image();
+            img.src = src;
+            img.onload = () => {
+                img.onload = null;
+                this.progress(src, 'success');
+            };
+            img.onerror = () => {
+                this.progress(src, 'fail');
+            };
+            
+        }
+        progress(src, type) {
+            if (type === 'fail') this.failNum++;
+            this.index++;
+            this.options.progressing(this.index, this.pics.length, type);
+            if (this.index === this.pics.length) {
+                this.options.complete(this.pics.length - this.failNum, this.failNum);
+            }
         }
 
     }
 
-
     Preload.defaultOptions = {
-        complete() {},
-        progress() {}
+        complete(successNum, failNum) {
+            console.log('成功加载' + successNum + '张图片，加载失败' + failNum + '张图片');
+
+        },
+        progressing(index, total, type) {
+            let percent = Math.floor(index / total * 100) + '%';
+            console.log(percent);
+        }
     };
-
-
-
-
-
 
 
     if (typeof exports != 'undefined' && !exports.nodeType) {

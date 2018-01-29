@@ -41,3 +41,10 @@
 ## 6.Preload
 
 原生 JavaScript 实现的预加载库
+
+地址：https://github.com/ChesterBu/Wheels/tree/master/Preload
+
+预览：https://chesterbu.github.io/Wheels/Preload/docs/index.html
+
+
+
