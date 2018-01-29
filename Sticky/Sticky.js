@@ -5,16 +5,6 @@
             this || {};
 
         const util = {
-            extend(target) {
-                for (let i = 0, len = arguments.length; i < len; i++) {
-                    for (let prop in arguments[i]) {
-                        if (arguments[i].hasOwnProperty(prop)) {
-                            target[prop] = arguments[i][prop];
-                        }
-                    }
-                }
-                return target;
-            },
             getStyle(element, prop) {
                 return window.getComputedStyle(element)[prop];
             },
@@ -42,24 +32,22 @@
             removeProperty(element, name) {
                 element.style.removeProperty(name);
             },
-            isValidListener(listener) {
-                if (typeof listener === 'function') {
-                    return true;
-                } else if (listener && typeof listener === 'object') {
-                    return isValidListener(listener.listener);
-                } else {
-                    return false;
-                }
-            }
+            
         };
 
     class EventEmitter {
         constructor() {
             this._events = {};
         }
-
-
-
+        static isValidListener(listener) {
+            if (typeof listener === 'function') {
+                return true;
+            } else if (listener && typeof listener === 'object') {
+                return isValidListener(listener.listener);
+            } else {
+                return false;
+            }
+        }
         /**
          * 添加事件
          * @param  {String} eventName 事件名称
@@ -68,7 +56,7 @@
          */
         on(eventName, listener) {
             if (!eventName || !listener) return;
-            if (!util.isValidListener(listener)) {
+            if (!EventEmitter.isValidListener(listener)) {
                 throw new TypeError('listener must be a function');
             }
             let events = this._events;
@@ -133,11 +121,10 @@
     }
 
     class Sticky extends EventEmitter {
-
         constructor(element, options) {
             super();
             this.element = typeof element === 'string' ? document.querySelector(element) : element;
-            this.options = util.extend({}, this.constructor.defaultOptions, options);
+            this.options = Object.assign({}, this.constructor.defaultOptions, options);
             this.init();
         }
 

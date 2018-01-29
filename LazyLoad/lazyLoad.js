@@ -3,22 +3,11 @@
         (typeof global == 'object' && global.global == global && global) ||
         this || {};
 
-    const util = {
-        extend(target, ...src) {
-            src.forEach((value) => {
-                for (let prop in value) {
-                    if (value.hasOwnProperty(prop)) {
-                        target[prop] = value[prop];
-                    }
-                }
-            });
-            return target;
-        }
-    };
+    
 
     class Lazy {
         constructor(opts) {
-            this.opts = util.extend({}, this.constructor.defaultOpts, opts);
+            this.opts = Object.assign({}, this.constructor.defaultOpts, opts);
             this.init();
         }
         init(){
@@ -31,7 +20,7 @@
                 bottom: 0 - root.innerHeight + (parseInt(this.opts.bottom, 10) || 0),
                 left: 0 - (parseInt(this.opts.left, 10) || 0),
                 right: 0 - root.innerWidth +(parseInt(this.opts.right, 10) || 0)
-            }
+            };
         }
 
         bindScrollEvent(){
@@ -41,9 +30,7 @@
             this.event = {
                 scrollEvent: scrollEvent,
                 loadEvent: loadEvent
-            }
-
-
+            };
         }
 
         handleLazyLoad(){
@@ -54,7 +41,7 @@
             timer = setTimeout(()=>{
                 timer = null;
                 self.render();
-            },this.opts.delay)
+            },this.opts.delay);
 
         }
 
@@ -67,7 +54,7 @@
                 return false;
             }
             let rect = element.getBoundingClientRect();
-            return(rect.right >= this.views.left && rect.bottom >= this.views.top && rect.left <= this.views.right && rect.top <= this.views.bottom)
+            return(rect.right >= this.views.left && rect.bottom >= this.views.top && rect.left <= this.views.right && rect.top <= this.views.bottom);
         }
 
         render(){
