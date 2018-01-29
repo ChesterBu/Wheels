@@ -2,7 +2,7 @@
 
 ## 介绍
 
-一个简单的 EventEmitter，可在浏览器中使用，帮助你实现事件的订阅和发布。
+一个简单的 EventEmitter，可在浏览器中使用，实现事件的订阅发布。
 
 ## 依赖
 
@@ -17,9 +17,8 @@
 或者
 
 ```js
-import eventEmitter from 'path/eventEmitter.js'
+import EventEmitter from 'path/eventEmitter.js'
 ```
-
 
 ## API
 
@@ -80,7 +79,3 @@ emitter.offall(eventName)
 ```
 
 * eventName 事件名称 如果不传，则删除所有事件
-
-
-
-
