@@ -125,9 +125,9 @@ class Watcher {
         this.exp = exp;
         Dep.target = this;
         let val = vm;
-        let arr = exp.split('.');
+        let arr = exp.split('.');   
         arr.forEach((k) => {
-            val = val[k];
+            val = val[k];       //触发getter 添加自己到属性订阅器中
         });
         Dep.target = null;
     }
