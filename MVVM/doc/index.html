@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>a:  {{a}}</p>
+        <p>computed:  {{hello}}</p>
+        <p>b.c:  {{b.c}}</p>
+        <input type="text" v-model='d'>
+        <span>d:  {{d}}</span>
+    </div>
+    <script src="../Mvvm.js"></script>
+    <script>
+        let vm = new Mvvm({
+            el: '#app',
+            data: {
+                a: 1,
+                b: {
+                    c: 1
+                },
+                d:10
+            },
+            computed: {
+                hello() {
+                    return this.a * 3
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
