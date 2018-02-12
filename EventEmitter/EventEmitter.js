@@ -1,4 +1,3 @@
-/*jshint esversion: 6 */
 (function () {
     //抄自underscore用于将 root指向全局对象
     let root = typeof self == 'object' && self.self === self && self ||

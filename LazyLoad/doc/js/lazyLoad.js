@@ -3,22 +3,10 @@
         (typeof global == 'object' && global.global == global && global) ||
         this || {};
 
-    const util = {
-        extend(target, ...src) {
-            src.forEach((value) => {
-                for (let prop in value) {
-                    if (value.hasOwnProperty(prop)) {
-                        target[prop] = value[prop];
-                    }
-                }
-            });
-            return target;
-        }
-    };
 
     class Lazy {
         constructor(opts) {
-            this.opts = util.extend({}, this.constructor.defaultOpts, opts);
+            this.opts = Object.assign({}, this.constructor.defaultOpts, opts);
             this.init();
         }
 
