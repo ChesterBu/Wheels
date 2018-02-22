@@ -64,6 +64,8 @@ setTimeout(() => {
 
 - 深度优先遍历，记录差异,在实际的代码中，会对新旧两棵树进行一个深度优先的遍历，这样每个节点都会有一个唯一的标记：
 
+![dfsTREE](https://github.com/ChesterBu/Wheels/blob/master/VirtualDom/dfsTree.png?raw=true)
+
 - 在深度优先遍历的时候，每遍历到一个节点就把该节点和新的的树进行对比。如果有差异的话就记录到一个对象里面。
 
 - 上面说的节点的差异指的是什么呢？对 DOM 操作可能会：
